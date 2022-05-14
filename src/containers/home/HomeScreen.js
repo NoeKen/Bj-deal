@@ -27,10 +27,10 @@ const HomeScreen = ({ navigation, viewMenu, replaceViewMenu }) => {
   const [loaded, setLoaded] = useState(false);
   const [baseUrl, setBaseUrl] = useState('https://www.bj-deal.com/');
 
-  <ActivityIndicatorElement />
+  
   useEffect(() => {
+    setVisible(true);
     const backAction = () => {
-
       Actions.currentScene === 'homeScreen'
         ? canGoBack === false
           ? setModalVisible(true)
@@ -163,10 +163,10 @@ const HomeScreen = ({ navigation, viewMenu, replaceViewMenu }) => {
             setCanGoForward(forward);
             stateChange();
             setCloseJoystick(true);
-            setVisible(false);
+            // setVisible(false);
           }}
           onTouchStart={()=>replaceViewMenu(false)}
-          onLoadStart={() => setVisible(true)}
+          // onLoadStart={() => setVisible(true)}
           // onLoadProgress={()=>setVisible(false)}
           onLoad={() => setVisible(false)}
         />
