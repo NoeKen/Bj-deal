@@ -125,7 +125,7 @@ const ContactUs = ({ navigation }) => {
             <Text style={{ color: 'white' }}>{Localization.meet_us} Pinterest</Text>
           </View>
         </TouchableOpacity>
-        <Text
+        {/* <Text
           style={{
             marginTop: 25,
             textAlign: 'center',
@@ -135,33 +135,8 @@ const ContactUs = ({ navigation }) => {
           }}
         >
           Bj-deal.
-        </Text>
+        </Text> */}
 
-        {/* {theme.mode === 'light' ? (
-          <TouchableOpacity
-            style={{
-              padding: 5,
-              alignSelf: 'center',
-              backgroundColor: commonColor.brandPrimary,
-              borderRadius: 10,
-            }}
-            onPress={() => dispatch(switchTheme(darkTheme))}
-          >
-            <Text>change to dark Theme</Text>
-          </TouchableOpacity>
-        ) : (
-          <TouchableOpacity
-            style={{
-              padding: 5,
-              alignSelf: 'center',
-              backgroundColor: commonColor.brandPrimary,
-              borderRadius: 10,
-            }}
-            onPress={() => dispatch(switchTheme(lightTheme))}
-          >
-            <Text>change to Light Theme</Text>
-          </TouchableOpacity> */}
-        {/* )} */}
       </View>
     </Container>
   );

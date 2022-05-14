@@ -37,7 +37,6 @@ class App extends React.Component {
             <StyleProvider style={getTheme(theme)}>
               <Init>
                 <Router>
-                  {/* {Routes} */}
                   <Stack key="root">{Routes}</Stack>
                 </Router>
               </Init>

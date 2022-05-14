@@ -76,6 +76,7 @@ const Buttons = ({navigation, reload, replaceViewMenu}) => {
                 style={styles.modal.cancel}
                 onPress={() => {
                   setModalVisible(false);
+                  replaceViewMenu(false);
                 }}
               >
                 <Text style={{}}>Cancel</Text>
@@ -99,11 +100,16 @@ const Buttons = ({navigation, reload, replaceViewMenu}) => {
         }}
         style={styles.iconContainer}
       >
-        <Image
+        {/* <Image
           source={require('../Assets/about.png')}
           style={{width: 25, height: 25}}
+        /> */}
+
+        <Icon
+          type="Octicons"
+          name="info"
+          style={{color: commonColor.brandPrimary}}
         />
-        {/* <Icon name="infos"/> */}
       </TouchableOpacity>
 
       <TouchableOpacity
@@ -118,9 +124,15 @@ const Buttons = ({navigation, reload, replaceViewMenu}) => {
           navigation.navigate('contactUs');
         }}
       >
-        <Image
+        {/* <Image
           source={require('../Assets/social.png')}
           style={{width: 25, height: 25}}
+        /> */}
+
+        <Icon
+          type="FontAwesome"
+          name="sitemap"
+          style={{color: commonColor.brandPrimary,fontSize:22}}
         />
       </TouchableOpacity>
 
@@ -159,11 +171,15 @@ const Buttons = ({navigation, reload, replaceViewMenu}) => {
           onShare();
         }}
       >
-        {/* <Icon type="FontAwesome" name="share" style={{color: commonColor.brandPrimary}} /> */}
-        <Image
+        <Icon
+          type="Entypo"
+          name="share"
+          style={{color: commonColor.brandPrimary}}
+        />
+        {/* <Image
           source={require('../Assets/share.png')}
           style={{width: 30, height: 30}}
-        />
+        /> */}
       </TouchableOpacity>
 
       <TouchableOpacity
