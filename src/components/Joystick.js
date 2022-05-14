@@ -5,7 +5,7 @@ import commonColor from '../../native-base-theme/variables/commonColor';
 import styles from '../containers/home/styles';
 import Buttons from './Buttons';
 
-const Joystick = ({ navigation, reload, home }) => {
+const Joystick = ({ navigation, reload, home,viewMenu, replaceViewMenu }) => {
   const [openMenu, setOpenMenu] = useState(false);
   return (
     <View
@@ -18,25 +18,27 @@ const Joystick = ({ navigation, reload, home }) => {
         alignSelf: 'flex-end',
       }}
     >
-      {openMenu ? (
+      {viewMenu ? (
         <View style={styles.menu}>
           <Buttons
             style={{ borderTopLeftRadius: 50 }}
             navigation={navigation}
             reload={reload}
             home={home}
+            replaceViewMenu={replaceViewMenu}
           />
         </View>
       ) : null}
       <TouchableOpacity
         style={styles.menuButton}
         onPress={() => {
-          setOpenMenu(!openMenu);
+          // setOpenMenu(!openMenu);
+          replaceViewMenu(!viewMenu)
           // navigation.navigate('buttons')
         }}
       >
         <Icon
-          name={!openMenu ? 'chevron-back' : 'chevron-forward'}
+          name={!viewMenu ? 'chevron-back' : 'chevron-forward'}
           style={{ color: commonColor.brandPrimary }}
         />
       </TouchableOpacity>

@@ -111,5 +111,17 @@ export default {
         theme: payload,
       };
     },
+    
+    /**
+     * Save form data
+     * @param {obj} state
+     * @param {obj} payload
+     */
+    replaceViewMenu(state, payload) {
+      return {
+        ...state,
+        viewMenu: payload,
+      };
+    },
   },
 };

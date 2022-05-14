@@ -8,13 +8,14 @@ import {
 } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import WebView from 'react-native-webview';
+import { connect } from 'react-redux';
 import commonColor from '../../../native-base-theme/variables/commonColor';
 import Joystick from '../../components/Joystick';
 import Localization from '../../constants/i18/Localization';
 import styles from './styles';
 
 // eslint-disable-next-line react/prop-types
-const HomeScreen = ({ navigation }) => {
+const HomeScreen = ({ navigation, viewMenu, replaceViewMenu }) => {
   const webViewRef = useRef();
   const [canGoBack, setCanGoBack] = useState(false);
   const [canGoForward, setCanGoForward] = useState(false);
@@ -26,34 +27,15 @@ const HomeScreen = ({ navigation }) => {
   const [loaded, setLoaded] = useState(false);
   const [baseUrl, setBaseUrl] = useState('https://www.bj-deal.com/');
 
+  <ActivityIndicatorElement />
   useEffect(() => {
-    stateChange();
     const backAction = () => {
-      // setTimeout(() => {
-      //   setExitApp(0);
-      // }, 5000); // 2 seconds to tap second-time
-
-      // if (exitApp === 0) {
-      //   setExitApp(exitApp + 1);
-
-      //   ToastAndroid.show("tap again to exit the app", ToastAndroid.SHORT);
-      // } else if (exitApp === 1) {
-      //   BackHandler.exitApp();
-      // }
 
       Actions.currentScene === 'homeScreen'
         ? canGoBack === false
           ? setModalVisible(true)
           : handleBackPress()
         : Actions.homeScreen();
-      // Alert.alert("Exit Bj-deal!", "Are you sure you want to exit the app?", [
-      //   {
-      //     text: "Cancel",
-      //     onPress: () => null,
-      //     style: "cancel"
-      //   },
-      //   { text: "YES", onPress: () => BackHandler.exitApp() }
-      // ]);
       return true;
     };
 
@@ -181,8 +163,11 @@ const HomeScreen = ({ navigation }) => {
             setCanGoForward(forward);
             stateChange();
             setCloseJoystick(true);
+            setVisible(false);
           }}
+          onTouchStart={()=>replaceViewMenu(false)}
           onLoadStart={() => setVisible(true)}
+          // onLoadProgress={()=>setVisible(false)}
           onLoad={() => setVisible(false)}
         />
         {visible ? <ActivityIndicatorElement /> : null}
@@ -207,6 +192,7 @@ const HomeScreen = ({ navigation }) => {
             name="chevron-back"
             onPress={() => {
               handleBackPress();
+              replaceViewMenu(false);
             }}
             style={{
               color: canGoBack ? commonColor.textColor : commonColor.inactiveTab,
@@ -244,6 +230,7 @@ const HomeScreen = ({ navigation }) => {
               }}
               onPress={() => {
                 Actions.homeScreen();
+                replaceViewMenu(false);
               }}
               // onPress={() => {Actions.HomeScreen({navigation:navigation, bonjour:'hello word'}), console.log(bonjour)} }
             >
@@ -257,36 +244,22 @@ const HomeScreen = ({ navigation }) => {
             }}
             onPress={() => {
               handleForwardPress();
+              replaceViewMenu(false);
             }}
           />
         </View>
-
-        {/* {canGoBack && visible == false ? ( */}
-        {/* <TouchableOpacity
-              style={styles.button}
-              onPress={() => {
-                handleBackPress(); */}
-        {/* }}
-            >
-              <Text style={styles.buttonTitle}>Back</Text> */}
-        {/* <Icon name='arrow-back' /> */}
-        {/* </TouchableOpacity>
-          ) : null} */}
-        {/* {canGoForward && visible == false ? (
-            <TouchableOpacity
-              style={styles.button}
-              onPress={() => {
-                handleForwardPress();
-                console.log('loaded: ', loaded);
-              }}
-            >
-              <Text style={styles.buttonTitle}>Forward</Text>
-            </TouchableOpacity>
-          ) : null} */}
-        {/* </View> */}
       </View>
-      <Joystick navigation={navigation} reload={refresh} home closeJoystick={closeJoystick} />
+      <Joystick navigation={navigation} reload={refresh} home closeJoystick={closeJoystick} viewMenu={viewMenu} replaceViewMenu={replaceViewMenu} />
     </Container>
   );
 };
-export default HomeScreen;
+
+const mapStateToProps=(state)=>({
+  viewMenu : state.auth.viewMenu,
+})
+
+const mapDispatchToProps = (dispatch) =>({
+  replaceViewMenu : dispatch.auth.replaceViewMenu,
+})
+
+export default connect(mapStateToProps,mapDispatchToProps) (HomeScreen);

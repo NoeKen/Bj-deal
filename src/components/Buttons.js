@@ -1,20 +1,11 @@
 import {Icon, Text, Title, View} from 'native-base';
 import React, {useState} from 'react';
-import {
-  TouchableOpacity,
-  StyleSheet,
-  Image,
-  BackHandler,
-  Share,
-  Modal
-} from 'react-native';
+import {BackHandler, Image, Modal, Share, TouchableOpacity} from 'react-native';
 import commonColor from '../../native-base-theme/variables/commonColor';
 import Localization from '../constants/i18/Localization';
 import styles from '../containers/home/styles';
-import ModalExit from './UI/ModalExit';
-// import styles from '../Screens/home/styles';
 
-const Buttons = ({navigation, reload, home}) => {
+const Buttons = ({navigation, reload, replaceViewMenu}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const onShare = async () => {
     try {
@@ -44,57 +35,66 @@ const Buttons = ({navigation, reload, home}) => {
       }}
     >
       <Modal
-      animationType="fade"
-      transparent={true}
-      visible={modalVisible}
-      onRequestClose={async () => {
-        setModalVisible(false);
-      }}
-    >
-      <View style={{backgroundColor:'rgba(0,0,0,0.4)',flex:1,alignItems: 'center',justifyContent: 'center'}}>
-        <View style={styles.modal}>
-          <Title
-            style={{
-              color: commonColor.brandPrimary,
-              fontWeight: 'bold',
-              alignSelf: 'center',
-              fontSize: 22,
-            }}
-          >
-            Bj-deal !!
-          </Title>
-          <Text style={{textAlign: 'center', fontSize: 18}}>
-            {Localization.exit}
-          </Text>
+        animationType="fade"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={async () => {
+          setModalVisible(false);
+        }}
+      >
+        <View
+          style={{
+            backgroundColor: 'rgba(0,0,0,0.4)',
+            flex: 1,
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <View style={styles.modal}>
+            <Title
+              style={{
+                color: commonColor.brandPrimary,
+                fontWeight: 'bold',
+                alignSelf: 'center',
+                fontSize: 22,
+              }}
+            >
+              Bj-deal !!
+            </Title>
+            <Text style={{textAlign: 'center', fontSize: 18}}>
+              {Localization.exit}
+            </Text>
 
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'flex-end',
-              marginRight: 10,
-            }}
-          >
-            <TouchableOpacity
-              style={styles.modal.cancel}
-              onPress={() => {
-                setModalVisible(false);
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'flex-end',
+                marginRight: 10,
               }}
             >
-              <Text style={{}}>Cancel</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => {
-                BackHandler.exitApp();
-              }}
-            >
-              <Text style={{fontWeight: '700'}}>Exit</Text>
-            </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.modal.cancel}
+                onPress={() => {
+                  setModalVisible(false);
+                }}
+              >
+                <Text style={{}}>Cancel</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  BackHandler.exitApp();
+                }}
+              >
+                <Text style={{fontWeight: '700'}}>Exit</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
-      </View>
-    </Modal>
+      </Modal>
+
       <TouchableOpacity
         onPress={() => {
+          replaceViewMenu(false);
           navigation.navigate('aboutUs');
         }}
         style={styles.iconContainer}
@@ -114,6 +114,7 @@ const Buttons = ({navigation, reload, home}) => {
           ...styles.iconContainer,
         }}
         onPress={() => {
+          replaceViewMenu(false);
           navigation.navigate('contactUs');
         }}
       >
@@ -131,10 +132,15 @@ const Buttons = ({navigation, reload, home}) => {
           ...styles.iconContainer,
         }}
         onPress={() => {
+          replaceViewMenu(false);
           reload();
         }}
       >
-        <Icon type="MaterialCommunityIcons" name="refresh" style={{color: commonColor.brandPrimary}}/>
+        <Icon
+          type="MaterialCommunityIcons"
+          name="refresh"
+          style={{color: commonColor.brandPrimary}}
+        />
         {/* <Image
           source={require('../Assets/reload.png')}
           style={{width: 20, height: 20}}
@@ -148,7 +154,10 @@ const Buttons = ({navigation, reload, home}) => {
           // marginBottom: 10,
           ...styles.iconContainer,
         }}
-        onPress={() => onShare()}
+        onPress={() => {
+          replaceViewMenu(false);
+          onShare();
+        }}
       >
         {/* <Icon type="FontAwesome" name="share" style={{color: commonColor.brandPrimary}} /> */}
         <Image
@@ -165,7 +174,11 @@ const Buttons = ({navigation, reload, home}) => {
           setModalVisible(true);
         }}
       >
-        <Icon type="Ionicons" name="close" style={{color: commonColor.brandPrimary}} />
+        <Icon
+          type="Ionicons"
+          name="close"
+          style={{color: commonColor.brandPrimary}}
+        />
         {/* <Image
           source={require('../Assets/close.png')}
           style={{width: 20, height: 20}}
@@ -174,22 +187,4 @@ const Buttons = ({navigation, reload, home}) => {
     </View>
   );
 };
-// const styles = StyleSheet.create({
-//   iconContainer: {
-//     backgroundColor: 'white',
-//     // backgroundColor: 'rgba(0,0,0,0.7)',
-//     borderRadius: 20,
-//     borderColor: commonColor.brandPrimary,
-//     borderWidth: 1,
-//     width: 40,
-//     height: 40,
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//     elevation: 1,
-//     shadowColor: 'black',
-//     shadowRadius: 0.5,
-//     shadowOffset: 0.7,
-//   },
-//   icon: {},
-// });
 export default Buttons;
