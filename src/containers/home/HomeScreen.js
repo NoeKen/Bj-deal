@@ -163,11 +163,8 @@ const HomeScreen = ({ navigation, viewMenu, replaceViewMenu }) => {
             setCanGoForward(forward);
             stateChange();
             setCloseJoystick(true);
-            // setVisible(false);
           }}
           onTouchStart={()=>replaceViewMenu(false)}
-          // onLoadStart={() => setVisible(true)}
-          // onLoadProgress={()=>setVisible(false)}
           onLoad={() => setVisible(false)}
         />
         {visible ? <ActivityIndicatorElement /> : null}
