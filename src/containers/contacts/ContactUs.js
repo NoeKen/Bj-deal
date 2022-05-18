@@ -73,7 +73,7 @@ const ContactUs = ({ navigation }) => {
             />
           </View>
           <View style={styles.textContent}>
-            <Text style={{ color: 'white' }}>{Localization.meet_us2} notre blog</Text>
+            <Text style={{ color: 'white' }}>{Localization.meet_us2} blog</Text>
           </View>
         </TouchableOpacity>
 
@@ -93,7 +93,21 @@ const ContactUs = ({ navigation }) => {
         </TouchableOpacity>
 
         {/* <Spacer size={25}/> */}
-
+        <TouchableOpacity
+          style={styles.pinterest}
+          onPress={() => Linking.openURL('https://www.pinterest.com/bjdeal237/')}
+        >
+          <View style={styles.logoPinterest}>
+            <Image
+              source={require('../../Assets/pinterest.png')}
+              style={{ width: 25, height: 25 }}
+            />
+          </View>
+          <View style={styles.textContent}>
+            <Text style={{ color: 'white' }}>{Localization.meet_us} Pinterest</Text>
+          </View>
+        </TouchableOpacity>
+        
         <TouchableOpacity
           style={styles.instagram}
           onPress={() => Linking.openURL('https://www.instagram.com/bjdeal.com1 ')}
@@ -111,20 +125,7 @@ const ContactUs = ({ navigation }) => {
 
         {/* <Spacer size={25}/> */}
 
-        <TouchableOpacity
-          style={styles.pinterest}
-          onPress={() => Linking.openURL('https://www.pinterest.com/bjdeal237/')}
-        >
-          <View style={styles.logoPinterest}>
-            <Image
-              source={require('../../Assets/pinterest.png')}
-              style={{ width: 25, height: 25 }}
-            />
-          </View>
-          <View style={styles.textContent}>
-            <Text style={{ color: 'white' }}>{Localization.meet_us} Pinterest</Text>
-          </View>
-        </TouchableOpacity>
+
         {/* <Text
           style={{
             marginTop: 25,

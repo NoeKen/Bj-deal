@@ -9,17 +9,7 @@ import Localization from '../../constants/i18/Localization';
 
 const CHeader = ({title, navigation, lang, replaceLanguage}) => {
   Localization.setLanguage(lang);
-  // const [isEnabled, setIsEnabled] = useState(lang==='en'?false:true);
-  // const toggleSwitch = () => setIsEnabled(previousState => !previousState);
-  // const [currentLang, setCurrentLang] = useState(replaceLanguage(lang === 'en' ? 'fr' : 'en'))
-  // const currentLang = async () => {
-  //   await replaceLanguage(lang === 'en' ? 'fr' : 'en'), toggleSwitch;
-  // };
-  // console.log('lang: ', lang);
 
-  // useEffect(()=>{
-  //   setIsEnabled(lang==='en'?false:true)
-  // },[])
 
   async function onPress() {
     console.log('lang: ', lang);
@@ -58,7 +48,7 @@ const CHeader = ({title, navigation, lang, replaceLanguage}) => {
             {title}
           </Title>
         </Body>
-        <Right style={{}} >
+        <Right style={{alignItems:"center",justifyContent:'space-evenly'}} >
           <Text>En</Text>
           <Switch
             trackColor={{
